@@ -50,13 +50,8 @@ exports.create = (req, res) => {
     state: req.body.state,
     zip: req.body.zip,
     images: req.body.images,
-    description_1: req.body.description_1,
-    description_2: req.body.description_2,
-    description_3: req.body.description_3,
-    description_4: req.body.description_4,
-    description_5: req.body.description_5,
-    description_6: req.body.description_6,
-    description_7: req.body.description_7,
+    description: req.body.description,
+
   });
 
   rental

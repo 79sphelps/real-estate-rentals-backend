@@ -135,27 +135,27 @@ exports.update = (req, res) => {
     });
 };
 
-// exports.delete = (req, res) => {
-//   if (!req.body) {
-//     return res.status(400).send({ message: "Data to delete cannot be empty." });
-//   }
+exports.delete = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({ message: "Data to delete cannot be empty." });
+  }
 
-//   const id = req.params.id;
+  const id = req.params.id;
 
-//   Rental.findByIdAndRemove(id, { useFindAndModify: false })
-//     .then((data) => {
-//       if (!data) {
-//         res.status(404).send({
-//           message: `Cannot delete Rental with id=${id}. Not found.`,
-//         });
-//       } else {
-//         res.status(200).send({ message: "Rental was deleted successfully" });
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: "Could not delete Rental with id=" + id });
-//     });
-// };
+  Rental.findByIdAndRemove(id, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Rental with id=${id}. Not found.`,
+        });
+      } else {
+        res.status(200).send({ message: "Rental was deleted successfully" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({ message: "Could not delete Rental with id=" + id });
+    });
+};
 
 // exports.deleteAll = (req, res) => {
 //   Rental.deleteMany({})

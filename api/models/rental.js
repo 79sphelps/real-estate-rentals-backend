@@ -3,15 +3,11 @@ module.exports = (mongoose) => {
     "rental",
     mongoose.Schema(
       {
-        // title: String,
-        // description: String,
-        // status: Boolean,
-        // dueDate: String,
         address: String,
         city: String,
         state: String,
         zip: String,
-        rent: String,
+        price: String,
         description: String,
         images: Object,
         beds: String,

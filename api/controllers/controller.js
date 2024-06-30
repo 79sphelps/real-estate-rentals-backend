@@ -51,7 +51,17 @@ exports.create = (req, res) => {
     zip: req.body.zip,
     images: req.body.images,
     description: req.body.description,
+    price: req.body.price,
 
+    beds: req.body.beds,
+    baths: req.body.baths,
+    sqft: req.body.sqft,
+    type: req.body.type, // condo
+    year: req.body.year,
+    heating: req.body.heating, // No Data
+    cooling: req.body.cooling, // No Data
+    hoa: req.body.hoa, // $150mo
+    parcelNumber: req.body.parcelNumber
   });
 
   rental

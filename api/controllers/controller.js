@@ -21,7 +21,7 @@ exports.createGeneralMessage = (req, res) => {
     .then((data) => res.status(201).send(data))
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the Rental.",
+        message: err.message || "Some error occurred while creating the property.",
       });
     });
 };
@@ -33,16 +33,16 @@ exports.findAllGeneralMessages = (req, res) => {
       res
         .status(500)
         .send({
-          message: err.message || "Some error occurred while fetching rentals.",
+          message: err.message || "Some error occurred while fetching properties.",
         });
     });
 };
 
 exports.create = (req, res) => {
-  // if (!req.body.title) {
-  //   res.status(400).send({ message: "Content cannot be empty!" });
-  //   return;
-  // }
+  if (!req.body.address) {
+    res.status(400).send({ message: "Property content cannot be empty!" });
+    return;
+  }
 
   const rental = new Rental({
     address: req.body.address,
@@ -68,7 +68,7 @@ exports.create = (req, res) => {
     .then((data) => res.status(201).send(data))
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the Rental.",
+        message: err.message || "Some error occurred while creating the property.",
       });
     });
 };
@@ -87,7 +87,7 @@ exports.findAll = (req, res) => {
       res
         .status(500)
         .send({
-          message: err.message || "Some error occurred while fetching rentals.",
+          message: err.message || "Some error occurred while fetching properties.",
         });
     });
 };
@@ -98,13 +98,13 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
   Rental.findById(id)
     .then((data) => {
-      if (!data) res.status(404).send({ message: "Rental not found" });
+      if (!data) res.status(404).send({ message: "Property not found" });
       else res.status(200).send(data);
     })
     .catch((err) =>
       res
         .status(500)
-        .send({ message: err.message || "Error retrieving rental with id " + id })
+        .send({ message: err.message || "Error retrieving property with id " + id })
     );
 };
 
@@ -132,14 +132,14 @@ exports.update = (req, res) => {
       if (!data) {
         res
           .status(404)
-          .send({ message: `Cannot update Rental with id=${id}. Not found.` });
+          .send({ message: `Cannot update property with id=${id}. Not found.` });
       } else {
-        res.status(200).send({ message: "Rental was updated successfully." });
+        res.status(200).send({ message: "Property was updated successfully." });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating Rental with id=" + id,
+        message: "Error updating property with id=" + id,
       });
     });
 };
@@ -155,10 +155,10 @@ exports.delete = (req, res) => {
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot delete Rental with id=${id}. Not found.`,
+          message: `Cannot delete property with id=${id}. Not found.`,
         });
       } else {
-        res.status(200).send({ message: "Rental was deleted successfully" });
+        res.status(200).send({ message: "Property was deleted successfully" });
       }
     })
     .catch((err) => {
@@ -172,12 +172,12 @@ exports.delete = (req, res) => {
 //       res
 //         .status(200)
 //         .send({
-//           message: `${data.deletedCount} Rentals were deleted successfully`,
+//           message: `${data.deletedCount} properties were deleted successfully`,
 //         })
 //     )
 //     .catch((err) =>
 //       res
 //         .status(500)
-//         .send({ message: err.message || "Error occurred while deleting rentals" })
+//         .send({ message: err.message || "Error occurred while deleting properties" })
 //     );
 // };

@@ -52,7 +52,6 @@ exports.create = (req, res) => {
     images: req.body.images,
     description: req.body.description,
     price: req.body.price,
-
     beds: req.body.beds,
     baths: req.body.baths,
     sqft: req.body.sqft,

@@ -38,6 +38,29 @@ exports.findAllGeneralMessages = (req, res) => {
     });
 };
 
+exports.deleteGeneralMessage = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({ message: "Data to delete cannot be empty." });
+  }
+
+  const id = req.params.id;
+
+  GeneralMessage.findByIdAndRemove(id, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete message with id=${id}. Not found.`,
+        });
+      } else {
+        res.status(200).send({ message: "Message was deleted successfully" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({ message: "Could not delete message with id=" + id });
+    });
+};
+
+
 exports.create = (req, res) => {
   if (!req.body.address) {
     res.status(400).send({ message: "Property content cannot be empty!" });

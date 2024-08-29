@@ -4,6 +4,7 @@ module.exports = (app) => {
 
   router.post("/generalmessages", rentals.createGeneralMessage);
   router.get("/generalmessages", rentals.findAllGeneralMessages);
+  router.delete("/generalmessages/:id", rentals.deleteGeneralMessage);
 
   router.post("/", rentals.create);
   router.get("/", rentals.findAll);

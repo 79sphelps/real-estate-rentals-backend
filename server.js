@@ -2,6 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+
+const dotenv = require("dotenv");
+dotenv.config();
+
 const app = express();
 
 if (process.env.NODE_ENV !== "dev") {
@@ -54,8 +58,6 @@ app.use(function(req, res, next) {
 // error handlers - these take err object.
 // these are per request error handlers.  They have two so in dev
 // you get a full stack trace.  In prod, first is never setup
-
-
 
 // development error handler
 // will print stacktrace

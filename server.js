@@ -8,12 +8,27 @@ dotenv.config();
 
 const app = express();
 
+const url = 'https://real-estate-rentals-frontend.onrender.com';
+const interval = 300000; // 5 minutes in milliseconds
+
+function reloadWebsite() {
+  axios.get(url)
+    .then(response => {
+      console.log('Website reloaded successfully');
+    })
+    .catch(error => {
+      console.error('Error reloading website:', error);
+    });
+}
+
+setInterval(reloadWebsite, interval);
+
 if (process.env.NODE_ENV !== "dev") {
   app.use(cors());
 } else {
   let corsOptions = {
       // origin: 'http://localhost:3000'
-      origin: 'https://real-estate-rentals-frontend.onrender.com'
+      origin: url
   };
   app.use(cors(corsOptions));
 }
@@ -23,6 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require('./api/models');
+const { default: axios } = require('axios');
 db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to the DB'))
   .catch(err => {

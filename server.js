@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-
+const cronJob = require('./cron').job;
 const dotenv = require("dotenv");
 dotenv.config();
+
+cronJob.start();
 
 const app = express();
 
@@ -21,7 +23,7 @@ function reloadWebsite() {
     });
 }
 
-setInterval(reloadWebsite, interval);
+setInterval(reloadWebsite, interval); // Due to Render.com sleeping after 5 mins of inactivity
 
 if (process.env.NODE_ENV !== "dev") {
   app.use(cors());
@@ -39,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require('./api/models');
 const { default: axios } = require('axios');
+const cron = require('./cron');
 db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to the DB'))
   .catch(err => {

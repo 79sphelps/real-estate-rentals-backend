@@ -41,8 +41,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require('./api/models');
-const { default: axios } = require('axios');
-const cron = require('./cron');
+
 db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to the DB'))
   .catch(err => {

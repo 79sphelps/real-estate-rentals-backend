@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const axios = require('axios');
 const cronJob = require('./cron').job;
 const dotenv = require("dotenv");
 dotenv.config();
